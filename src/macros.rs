@@ -260,7 +260,7 @@ macro_rules! func_client{
 macro_rules! imports{
     () => (
         use tokio_core::reactor::Core;
-        use hyper_tls::HttpsConnector;
+        use hyper_rustls::HttpsConnector;
         use hyper::client::Client;
         use hyper::client::Request;
         use hyper::StatusCode;
