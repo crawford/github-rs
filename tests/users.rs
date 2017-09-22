@@ -1,4 +1,5 @@
 extern crate github_rs as gh;
+extern crate serde_json;
 use gh::client::Github;
 use gh::headers::{ etag, rate_limit_remaining };
 use std::io::BufReader;
@@ -21,7 +22,7 @@ fn get_user_repos() {
                                    .repos()
                                    .owner("mgattozzi")
                                    .repo("github-rs")
-                                   .execute()
+                                   .execute::<serde_json::Value>()
                                    .unwrap();
     println!("{}", headers);
     println!("{}", status);
@@ -38,7 +39,7 @@ fn cached_response() {
                            .repos()
                            .owner("mgattozzi")
                            .repo("github-rs")
-                           .execute()
+                           .execute::<serde_json::Value>()
                            .unwrap();
     let etag = etag(&headers);
     //let limit = rate_limit_remaining(&headers).unwrap();
@@ -48,7 +49,7 @@ fn cached_response() {
                            .repos()
                            .owner("mgattozzi")
                            .repo("github-rs")
-                           .execute()
+                           .execute::<serde_json::Value>()
                            .unwrap();
     //let limit2 = rate_limit_remaining(&headers).unwrap();
     let _ = rate_limit_remaining(&headers).unwrap();
