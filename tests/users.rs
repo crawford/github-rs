@@ -1,6 +1,6 @@
 extern crate github_rs as gh;
 extern crate serde_json;
-use gh::client::Github;
+use gh::client::{ Executor, Github };
 use gh::headers::{ etag, rate_limit_remaining };
 use std::io::BufReader;
 use std::io::prelude::*;

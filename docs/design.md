@@ -142,25 +142,14 @@ macros you need to understand, how to use them, and what they do:
       @TypeA                       //    called, returns a B with a GET/POST
         |?> func -> TypeB = param  //    parameter. 'param' is the name of the
   );                               //    variable and is for documentation
-  impl_macro!(                     //<-- Create a function 'func' which executes
-      @TypeA                       //    the request. 'func' is always named
-        |-> func                   //    named "execute" for clarity
-  );
   ```
 
 - `exec!`
   It can be used in two ways:
 
   ```rust
-  exec!(TypeA);            //<-- Creates an impl for TypeA with only the exec
-                           //    function. Use if there is nothing else the
-                           //    type needs. If it has all the information
-                           //    it needs then it's ready to execute the
-                           //    request.
-  impl<'a> TypeA<'a> {
-    func!(TypeA, TypeB, parameter),
-    exec!(),               //<-- Creates the exec function in this impl since
-                           //    it can transform to another type or it has
-                           //    a valid url/values to execute a request
+  exec!(TypeA);            //<-- Creates an impl of Executor for Type A. This
+                           //    is neccessary for every type which needs an
+                           //    execute method.
   }
   ```
